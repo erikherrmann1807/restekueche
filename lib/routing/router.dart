@@ -1,8 +1,10 @@
 import 'package:go_router/go_router.dart';
-import 'package:restkueche/routing/routes.dart';
-import 'package:restkueche/ui/food_scan/views/food_scan_screen.dart';
-import 'package:restkueche/ui/home/views/home_Screen.dart';
-import 'package:restkueche/ui/recipes/views/recipes_screen.dart';
+import 'package:restekueche/routing/routes.dart';
+import 'package:restekueche/ui/food_scan/views/food_scan_screen.dart';
+import 'package:restekueche/ui/home/views/home_Screen.dart';
+
+import '../ui/recipes/views/recipes_screen.dart' show RecipesScreen;
+
 
 GoRouter router() => GoRouter(
   initialLocation: Routes.home,

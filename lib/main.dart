@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restkueche/routing/router.dart';
+import 'package:restekueche/routing/router.dart';
 
 void main() {
   runApp(const MyApp());

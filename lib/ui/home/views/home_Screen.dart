@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restkueche/routing/routes.dart';
+import 'package:restekueche/routing/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
