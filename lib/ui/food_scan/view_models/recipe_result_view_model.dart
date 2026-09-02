@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:restekueche/data/repositories/recipe/recipe_repository_impl.dart';
 import 'package:restekueche/domain/models/recipe.dart';
 
-class RecipesViewModel extends ChangeNotifier {
-  RecipesViewModel({required RecipeRepositoryImpl recipeRepositoryImpl})
-    : _recipeRepositoryImpl = recipeRepositoryImpl;
+class RecipeResultViewModel extends ChangeNotifier {
+  RecipeResultViewModel({
+    required RecipeRepositoryImpl recipeRepositoryImpl,
+    required this.ingredients,
+  }) : _recipeRepositoryImpl = recipeRepositoryImpl;
 
   final RecipeRepositoryImpl _recipeRepositoryImpl;
 
-  String recipePrompt = '';
+  /// The list the user confirmed on the previous screen.
+  final List<String> ingredients;
 
   Recipe? _recipe;
   Recipe? get recipe => _recipe;
@@ -20,7 +23,7 @@ class RecipesViewModel extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
 
   Future<void> loadRecipe() async {
-    if (recipePrompt.trim().isEmpty || _isLoading) {
+    if (ingredients.isEmpty || _isLoading) {
       return;
     }
 
@@ -29,8 +32,9 @@ class RecipesViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final Recipe result =
-          await _recipeRepositoryImpl.generateRecipe(recipePrompt);
+      final Recipe result = await _recipeRepositoryImpl.generateRecipe(
+        ingredients.join(', '),
+      );
       // The service returns an empty model instead of throwing when the
       // proxy answers with a non-200, so treat that as a failure too.
       if (_isEmpty(result)) {

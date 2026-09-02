@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- image_picker nutzt den System-Kamera-Intent; die Kamera ist
+         damit ein Nice-to-have und keine Installationsvoraussetzung. -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
     <application
         android:label="restkueche"
         android:name="${applicationName}"
