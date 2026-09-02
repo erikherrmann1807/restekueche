@@ -14,12 +14,28 @@ Deno.serve(async (req) => {
     });
   }
 
+  // Ohne Secret würde der Request bei Gemini als 400 API_KEY_INVALID landen –
+  // das ist irreführend, deshalb hier direkt melden.
+  if (!GEMINI_API_KEY) {
+    console.error("GEMINI_API_KEY ist nicht gesetzt (supabase secrets set --env-file supabase/.env)");
+    return new Response(
+      JSON.stringify({ error: "GEMINI_API_KEY is not configured for this function" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      },
+    );
+  }
+
   try {
     const body = await req.json();
 
-    const response = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
+    const response = await fetch(GEMINI_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": GEMINI_API_KEY,
+      },
       body: JSON.stringify(body),
     });
 

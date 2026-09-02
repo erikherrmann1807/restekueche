@@ -1,5 +1,5 @@
 import 'package:restekueche/data/model/gemini_recipe_model.dart';
-import 'package:restekueche/utils/recipe_service.dart';
+import 'package:restekueche/utils/recipe_json_parser.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RecipeService {
@@ -12,7 +12,7 @@ class RecipeService {
             'parts': [
               {'text': 'Gib die Antwort als structured json output. '
               'Du bist ein Experte darin anhand von den genannten '
-                  'Lebensmitteln Rezepte vorzuschlagen. Diese sollen folgende '
+                  'Lebensmitteln ein Rezept vorzuschlagen. Dieses soll folgende '
                   'Punkte enthalten: title, ingredients, steps, duration. '
                   'Lebenmittel: $ingredients. '
                   'Gib als Antwort nur die genannten Felder als json zurück.'
